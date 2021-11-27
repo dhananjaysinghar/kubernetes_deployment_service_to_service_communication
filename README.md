@@ -1,6 +1,19 @@
 # kubernetes_deployment_service_to_service_communication
 
 
+Steps:
+0. Start docker and minikube in local machine.
+1. Create a spring boot application.
+2. Create a docker image and push to hub.
+3. Create a namespace in kubernetes.
+4. Create 2files deployment.yaml and services.yml
+5. Create Deployment in kubernetes.
+6. Create Service in kubernetes.
+7. Create a load balancer with service in kubernetes.
+8. Run minikube tunnel command to expose those lb's to localhost 
+
+
+
 ## Main Commands:
 ~~~
 minikube start
