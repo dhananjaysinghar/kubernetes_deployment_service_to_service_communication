@@ -1,0 +1,6 @@
+server:
+  port: 9090
+
+app:
+  external:
+    doc-url: http://lb-doc-svc:8080/docs

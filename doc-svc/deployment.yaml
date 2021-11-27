@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: deployment-doc-svc
+  name: deployment-doc-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-doc-svc
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: deployment-doc-svc
+    spec:
+      containers:
+      - image: dhananjayasinghar/doc-svc:latest
+        name: doc-svc
+        resources: {}
+status: {}

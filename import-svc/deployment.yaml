@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: deployment-import-svc
+  name: deployment-import-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-import-svc
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: deployment-import-svc
+    spec:
+      containers:
+      - image: dhananjayasinghar/import-svc:latest
+        name: import-svc
+        resources: {}
+status: {}
