@@ -45,8 +45,8 @@ kubectl get all -n test-namespace
 kubectl expose deployment deployment-import-svc --type=LoadBalancer --name=lb-import-svc  --port=9090
 minikube tunnel
 
-Note: Run minikube at end to expose the lb to localhost
-Note: one service to another service communicate over lb-name (lb-doc-svc)
+Note: Run minikube tunnel at end to expose the lb to localhost
+Note: We can call service to another service over lb-name (lb-doc-svc)
 ~~~
 
 ### Output:
