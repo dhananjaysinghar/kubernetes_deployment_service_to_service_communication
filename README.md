@@ -51,7 +51,7 @@ Note: We can call service to another service over lb-name (lb-doc-svc)
 
 ### Output:
 ~~~
-C:\Users\DSS049\Desktop\Kubernetes_Spring_app\import-svc>kubectl get all -n test-namespace
+C:\Users\Dhananjay\Desktop\Kubernetes_Spring_app\import-svc>kubectl get all -n test-namespace
 NAME                                         READY   STATUS    RESTARTS        AGE
 pod/deployment-doc-svc-7d9b8b7fc6-vkxkm      1/1     Running   1 (7m58s ago)   89m
 pod/deployment-import-svc-6d4b8cc5d5-rghtn   1/1     Running   1 (7m58s ago)   10m
