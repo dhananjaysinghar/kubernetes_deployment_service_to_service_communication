@@ -1,7 +1,7 @@
 # kubernetes_deployment_service_to_service_communication
 
 
-## Main Command:
+## Main Commands:
 ~~~
 minikube start
 minikube stop
@@ -69,4 +69,27 @@ deployment.apps/deployment-import-svc   1/1     1            1           10m
 NAME                                               DESIRED   CURRENT   READY   AGE
 replicaset.apps/deployment-doc-svc-7d9b8b7fc6      1         1         1       89m
 replicaset.apps/deployment-import-svc-6d4b8cc5d5   1         1         1       10m
+~~~
+
+Userful Commands:
+~~~
+kubectl port-forward service/service-import-svc 9090:9090 -n test-namespace
+kubectl logs deployment-import-svc-6d4b8cc5d5-ncfz6
+kubectl exec -it deployment-import-svc-6d4b8cc5d5-kv9n9 bash
+minikube service --url service-import-svc --namespace test-namespace
+kubectl delete ns test-namespace
+kubectl get pods --all-namespaces
+kubectl apply -f deployment.yaml -n test-namespace
+kubectl get all -n test-namespace
+kubectl get pods --output=wide
+kubectl delete pods load-generator
+kubectl get services -o wide
+kubectl describe services app-doc-svc
+minikube addons enable ingress
+kubectl expose deployment deployment-doc-svc --type=LoadBalancer --name=test-namespace  --port=8080
+kubectl get all -n test-namespace
+kubectl logs pod/app-doc-svc-7967ffbb9c-xrjvv -n test-namespace
+kubectl delete ns test-namespace
+kubectl get svc pp-doc-svc -n test-namespace
+kubectl patch svc app-doc-svc -n test-namespace -p '{"spec": {"type": "LoadBalancer", "externalIPs":["<public ip>"]}}'
 ~~~
