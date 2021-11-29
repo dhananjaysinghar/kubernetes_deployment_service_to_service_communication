@@ -106,3 +106,71 @@ kubectl delete ns test-namespace
 kubectl get svc pp-doc-svc -n test-namespace
 kubectl patch svc app-doc-svc -n test-namespace -p '{"spec": {"type": "LoadBalancer", "externalIPs":["<public ip>"]}}'
 ~~~
+## INGRESS related
+~~~
+minikube addons enable ingress
+  --> Automatically starts the k8s Nginx implementation of Ingress Controller.
+kubectl get pod -n ingress-nginx
+
+kubectl get ns
+kubectl get pod -n test-namespace
+kubectl apply -f ingress.yaml
+kubectl get ingress --watch
+kubectl get ingress --all-namespaces
+kubectl describe ingress
+kubectl get ingress test-ingress
+kubectl get ingresses test-ingress
+kubectl get service -n ingress-nginx
+kubectl delete ingresses test-ingress
+
+kubectl exec -it deployment-import-svc-6d4b8cc5d5-rghtn bash
+
+
+curl --location --request GET 'http://docs.test.com/docs'
+
+
+kubectl get service -n ingress-nginx  ingress-nginx-controller
+kubectl patch service ingress-nginx-controller -n kube-system --patch "$(cat ingress-nginx-svc-patch.yaml)"
+
+kubectl get deployments --all-namespaces
+kubectl get ing
+
+
+ annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "http://docs.test.com, http://origin-site.com, https://example.org:1199
+
+kubectl get all -n test-namespace
+kubectl get ing
+kubectl describe ingress
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-ingress
+  namespace: test-namespace
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "http://docs.test.com, http://origin-site.com, https://example.org:1199"
+spec:
+  tls:
+    - hosts:
+        - docs.test.com
+      secretName: tls-docs-test-com
+  rules:
+    - host: docs.test.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: service-doc-svc
+                port:
+                  number: 8080
+~~~
