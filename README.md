@@ -146,7 +146,10 @@ kubectl get ing
 kubectl get all -n test-namespace
 kubectl get ing
 kubectl describe ingress
+~~~
 
+#### ingress.yaml
+~~~
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
