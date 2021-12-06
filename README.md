@@ -162,24 +162,31 @@ metadata:
   name: test-ingress
   namespace: test-namespace
   annotations:
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
-    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "http://docs.test.com, http://origin-site.com, https://example.org:1199"
+    kubernetes.io/ingress.class: nginx
+#    nginx.ingress.kubernetes.io/whitelist-source-range: "27.110.30.45, 68.50.85.421"
+    nginx.ingress.kubernetes.io/server-snippet: |
+            set $agentflag 0;
+            if ($http_user_agent ~* "(PostmanRuntime|outbound|import-service|doc-service)" ){
+                set $agentflag 1;
+            } 
+            if ( $agentflag = 0 ) {
+                return 403;
+            }
+        
+
 spec:
   tls:
     - hosts:
         - docs.test.com
       secretName: tls-docs-test-com
   rules:
-    - host: docs.test.com
+    - host: "*.test.com"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: service-doc-svc
+                name: lb-doc-svc
                 port:
                   number: 8080
-~~~
