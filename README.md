@@ -106,6 +106,12 @@ kubectl delete ns test-namespace
 kubectl get svc pp-doc-svc -n test-namespace
 kubectl patch svc app-doc-svc -n test-namespace -p '{"spec": {"type": "LoadBalancer", "externalIPs":["<public ip>"]}}'
 ~~~
+
+### Create a linux machine:
+~~~
+kubectl run -it --rm test_linux --image=mcr.microsoft.com/aks/fundamental/base-ubuntu:v0.0.11
+~~~
+
 ## INGRESS related
 ~~~
 minikube addons enable ingress
