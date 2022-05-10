@@ -4,3 +4,4 @@ server:
 app:
   external:
     doc-url: http://lb-doc-svc:8080/docs
+#    doc-url: http://{{service-name}}.{{namespace-name}}.svc.cluster.local:{{portnumber}}
