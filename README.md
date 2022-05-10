@@ -24,6 +24,9 @@ kubectl get all -n test-namespace
 kubectl get all -n test-namespace
 kubectl config set-context --current --namespace=test-namespace
 
+Internal cluster url template:
+http://{{service-name}}.{{namespace-name}}.svc.cluster.local:{{portnumber}}
+
 ~~~
 
 ### DOC-SVC:
